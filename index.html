@@ -3,21 +3,39 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+    <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://meet.jit.si/libs/lib-jitsi-meet.min.js"></script>
-    <script  src="example.js"></script>
+    <script  src="home.js"></script>
 
 </head>
-<body>
+<body >
     <a href="#" onclick="unload()">Disconnect</a> 
     <a href="#" onclick="switchVideo()">Switch Video</a>
     <a href="#" onclick="Join_conference()">join conference</a>
+    <a href="#" onclick="getNumberOfParticipants()">number of participants</a>
     <div id="audioOutputSelectWrapper" style="display: none;">
         Change audio output device
         <select id="audioOutputSelect" onchange="changeAudioOutput(this)"></select>
-    </div> 
-    <video id="localVideo" autoplay="true"></video>
-    <audio id="localAudio" autoplay="true" muted="true"></audio>
+    </div>
+    <div class="local_video" id="local_video">
+
+    </div>
+    <div class="custom_video1" id="custom_video1">
+
+    </div>
+    <div class="custom_video2" id="custom_video2">
+
+    </div>
+    <div class="custom_video3" id="custom_video3">
+
+    </div>
+    <div class="custom_video4" id="custom_video4">
+
+    </div>
+    <!-- <div class="custom_video2" id = "jitsi-meet_more_than_2">
+            
+    </div>  -->
 </body>
 </html>
 

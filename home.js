@@ -9,7 +9,6 @@
 //     console.log('received: %s', message);
 //     });
 // });
-
 var subdomain = "";
 if (subdomain) {
     subdomain = subdomain.substr(0, subdomain.length - 1).split('.').join('_').toLowerCase() + '.';
@@ -148,7 +147,7 @@ const options = {
         environment: 'meet-jit-si',
         envType: 'prod',
         releaseNumber: '735',
-        shard: 'meet-jit-si-ap-mumbai-1-s30',
+        shard: 'to meet-jit-si-ap-mumbai-1-s30',
         region: 'ap-mumbai-1',
         userRegion: 'ap-mumbai-1',
         crossRegion: 0
@@ -172,7 +171,7 @@ const options = {
         }
     }
 };
-
+//initialize and integer with 0
 ////////////////////////////////////////////////////////////////////////////////////
 const confOptions = {
 };
@@ -206,7 +205,10 @@ function onLocalTracks(tracks) {
                 console.log(
                     `track audio output device was changed to ${deviceId}`));
         if (localTracks[i].getType() === 'video') {
-            $('body').append(`<video autoplay='1' id='localVideo${i}' />`);
+            $('#local_video').append(
+                //resize the below video to center and 30% of the screen width
+                `<video class="local" autoplay id="localVideo${i}" style="width: 30%; height: 30%; position: absolute; top: 30%; left: 30%; transform: translate(-50%, -50%);"></video>`);
+            // `<video autoplay='1' id='localVideo${i}' /></div>`
             localTracks[i].attach($(`#localVideo${i}`)[0]);
         } else {
             $('body').append(
@@ -219,10 +221,12 @@ function onLocalTracks(tracks) {
     }
 }
 
+
 /**
  * Handles remote tracks
  * @param track JitsiTrack object
  */
+var count = 1;
 function onRemoteTrack(track) {
     if (track.isLocal()) {
         return;
@@ -233,7 +237,6 @@ function onRemoteTrack(track) {
         remoteTracks[participant] = [];
     }
     const idx = remoteTracks[participant].push(track);
-
     track.addEventListener(
         JitsiMeetJS.events.track.TRACK_AUDIO_LEVEL_CHANGED,
         audioLevel => console.log(`Audio Level remote: ${audioLevel}`));
@@ -249,13 +252,78 @@ function onRemoteTrack(track) {
                 `track audio output device was changed to ${deviceId}`));
     const id = participant + track.getType() + idx;
 
-    if (track.getType() === 'video') {
-        $('body').append(
-            `<video autoplay='1' id='${participant}video${idx}' />`);
-    } else {
-        $('body').append(
-            `<audio autoplay='1' id='${participant}audio${idx}' />`);
+    //if count = 1 append th video to the div with class custom_video1
+    if (count == 1) {
+        if (track.getType() === 'video') {
+            //append video to the div with class name video1
+            $('#custom_video1').append(
+                `<video class='video1' autoplay='1' id='${participant}video${idx}' />`);
+        } else {
+            $('#custom_video1').append(
+                `<audio class='audio1' autoplay='1' id='${participant}audio${idx}' />`);
+        }
+        count++;
     }
+    else if (count == 2) {
+        if (track.getType() === 'video') {
+            //append video to the div with class name video1
+            $('#custom_video2').append(
+                `<video class='video2' autoplay='1' id='${participant}video${idx}' />`);
+        } else {
+            $('#custom_video2').append(
+                `<audio class='audio2' autoplay='1' id='${participant}audio${idx}' />`);
+        }
+        count++;
+    }
+    else if (count == 3) {
+        if (track.getType() === 'video') {
+            //append video to the div with class name video1
+            $('#custom_video3').append(
+                `<video class='video3' autoplay='1' id='${participant}video${idx}' />`);
+        } else {
+            $('#custom_video3').append(
+                `<audio class='audio3' autoplay='1' id='${participant}audio${idx}' />`);
+        }
+        count++;
+    }
+    else if (count == 4) {
+        if (track.getType() === 'video') {
+            //append video to the div with class name video1
+            $('#custom_video4').append(
+                `<video class='video4' autoplay='1' id='${participant}video${idx}' />`);
+        } else {
+            $('#custom_video4').append(
+                `<audio class='audio4' autoplay='1' id='${participant}audio${idx}' />`);
+        }
+        count++;
+    }
+    // if (track.getType() === 'video') {
+    //     $('body').append(
+    //         `<video class='video${count}' autoplay='1' id='${participant}video${idx}' />`);
+    // } else {
+    //     $('body').append(
+    //         `<audio class='audio${count}' autoplay='1' id='${participant}audio${idx}' />`);
+    // }
+    // if (getNumberOfParticipants() < 2) {
+    //         if (track.getType() === 'video') {
+    //             $('body').append(
+    //                 `<video class="video1${count}" autoplay id='${participant}video${idx}' style="width: 30%; height: 30%; position: absolute; top: 30%; right: 30%;left: 70% transform: translate(-50%, -50%);"></video>`);
+    //             }
+    //     else{
+    //         $('body').append(
+    //             `<audio class="audio1${count} autoplay='1' id='${participant}audio${idx}' />`);
+    //         }
+    //     }
+    // else {
+    //     if (track.getType() === 'video') {
+    //         $('body').append(
+    //             `<video class="video2${count}" autoplay id='${participant}video${idx}' style="width: 30%; height: 30%; position: absolute; top: 30%; right: 30%;left: 70% transform: translate(-50%, -50%);"></video>`);
+    //         }
+    //         else{
+    //     $('body').append(
+    //         `<audio class="audio2${count} autoplay='1' id='${participant}audio${idx}' />`);
+    //     }
+    // }
     track.attach($(`#${id}`)[0]);
 }
 
@@ -279,11 +347,33 @@ function onUserLeft(id) {
     if (!remoteTracks[id]) {
         return;
     }
-    const tracks = remoteTracks[id];
 
+    const tracks = remoteTracks[id];
+    var i = getNumberOfParticipants();
+    // if (i < 2) {
+    //     //remove div with id 
+    //     //$(`#${id}`).remove();
+    //     //remove video with class video1
+    //     $(`.video1${count}`).remove();
+    //     $(`.audio1${count}`).remove();
+    //     count--;
+    //     //remove video with class id
+    //     // $(`.${id}`).remove();
+    //     //remove video with class video1${participant} and id ${participant}video${idx}
+    //     // $(``).remove();
+
+    // }
+    // //remove div with id jitsi-meet_more_than_2
+    // else {
+    //     //$(`#${id}`).remove();
+    //     $(`.video2${count}`).remove();
+    //     $(`.audio2${count}`).remove();
+    //     count --;
+    // }
     for (let i = 0; i < tracks.length; i++) {
         tracks[i].detach($(`#${id}${tracks[i].getType()}`));
     }
+
 }
 
 /**
@@ -291,7 +381,7 @@ function onUserLeft(id) {
  */
 
 function onConnectionSuccess() {
-    room = connection.initJitsiConference('khushil_conference', confOptions);
+    room = connection.initJitsiConference('khushil', confOptions);
     room.on(JitsiMeetJS.events.conference.TRACK_ADDED, onRemoteTrack);
     room.on(JitsiMeetJS.events.conference.TRACK_REMOVED, track => {
         console.log(`track removed!!!${track}`);
@@ -318,6 +408,12 @@ function onConnectionSuccess() {
         () => console.log(`${room.getPhoneNumber()} - ${room.getPhonePin()}`));
     room.join();
     room.setDisplayName('IGCAR');
+}
+
+//function to return number of participants in conference
+function getNumberOfParticipants() {
+    console.log(room.getParticipants().length);
+    return room.getParticipants().length;
 }
 
 /**
