@@ -13,6 +13,8 @@ var subdomain = "";
 if (subdomain) {
     subdomain = subdomain.substr(0, subdomain.length - 1).split('.').join('_').toLowerCase() + '.';
 }
+const map1 = new Map();
+
 const options = {
     hosts: {
         domain: 'meet.jit.si',
@@ -207,7 +209,7 @@ function onLocalTracks(tracks) {
         if (localTracks[i].getType() === 'video') {
             $('#local_video').append(
                 //resize the below video to center and 30% of the screen width
-                `<video class="local" autoplay id="localVideo${i}" style="width: 30%; height: 30%; position: absolute; top: 30%; left: 30%; transform: translate(-50%, -50%);"></video>`);
+                `<video class="local" autoplay id="localVideo${i}" ></video>`);
             // `<video autoplay='1' id='localVideo${i}' /></div>`
             localTracks[i].attach($(`#localVideo${i}`)[0]);
         } else {
@@ -253,11 +255,13 @@ function onRemoteTrack(track) {
     const id = participant + track.getType() + idx;
 
     //if count = 1 append th video to the div with class custom_video1
-    if (count == 1) {
+    if (count == 1 ) {
         if (track.getType() === 'video') {
             //append video to the div with class name video1
             $('#custom_video1').append(
                 `<video class='video1' autoplay='1' id='${participant}video${idx}' />`);
+                map1.set(participant,'#custom_video1');
+                console.log(participant + " hey 2");
         } else {
             $('#custom_video1').append(
                 `<audio class='audio1' autoplay='1' id='${participant}audio${idx}' />`);
@@ -269,28 +273,32 @@ function onRemoteTrack(track) {
             //append video to the div with class name video1
             $('#custom_video2').append(
                 `<video class='video2' autoplay='1' id='${participant}video${idx}' />`);
+                map1.set(participant,'#custom_video2');
         } else {
             $('#custom_video2').append(
                 `<audio class='audio2' autoplay='1' id='${participant}audio${idx}' />`);
         }
         count++;
     }
-    else if (count == 3) {
+    else if (count == 3 ) {
         if (track.getType() === 'video') {
             //append video to the div with class name video1
             $('#custom_video3').append(
                 `<video class='video3' autoplay='1' id='${participant}video${idx}' />`);
+                map1.set(participant,'#custom_video3');
+                console.log(participant + " hey 2");
         } else {
             $('#custom_video3').append(
                 `<audio class='audio3' autoplay='1' id='${participant}audio${idx}' />`);
         }
         count++;
     }
-    else if (count == 4) {
+    else if (count == 4 ) {
         if (track.getType() === 'video') {
             //append video to the div with class name video1
             $('#custom_video4').append(
                 `<video class='video4' autoplay='1' id='${participant}video${idx}' />`);
+                map1.set(participant,'#custom_video4');
         } else {
             $('#custom_video4').append(
                 `<audio class='audio4' autoplay='1' id='${participant}audio${idx}' />`);
@@ -347,6 +355,9 @@ function onUserLeft(id) {
     if (!remoteTracks[id]) {
         return;
     }
+    console.log(map1.get(id) + "hey3");
+    var s= map1.get(id) ;
+    $('#' + s).remove();
 
     const tracks = remoteTracks[id];
     var i = getNumberOfParticipants();
