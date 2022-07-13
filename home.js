@@ -255,7 +255,7 @@ function onRemoteTrack(track) {
     const id = participant + track.getType() + idx;
 
     //if count = 1 append th video to the div with class custom_video1
-    if (count == 1 ) {
+    if (count == 1) {
         if (track.getType() === 'video') {
             //append video to the div with class name video1
             $('#custom_video1').append(

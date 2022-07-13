@@ -6,6 +6,9 @@
     align-items: center;
     align-content: stretch;
   } */
+  body{
+    background: rgb(186, 96, 12);
+  }
   
   .video1 {
     width: 35%;
