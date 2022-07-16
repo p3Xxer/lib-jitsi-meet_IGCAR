@@ -9,6 +9,22 @@
 //     console.log('received: %s', message);
 //     });
 // });
+function swapStyleSheet(sheet) {
+    document.getElementById("pagestyle").setAttribute("href", sheet);  
+}
+
+function initate() {
+    var style1 = document.getElementById("stylesheet1");
+    var style2 = document.getElementById("stylesheet2");
+    var style3 = document.getElementById("stylesheet3");
+
+    style1.onclick = function () {swapStyleSheet("style1.css") ;};
+    style2.onclick = function () {swapStyleSheet("style2.css") ;};
+    style3.onclick = function () {swapStyleSheet("style3.css") ;};
+}
+
+window.onload = initate;
+var alpha = 1;
 var subdomain = "";
 if (subdomain) {
     subdomain = subdomain.substr(0, subdomain.length - 1).split('.').join('_').toLowerCase() + '.';
@@ -358,7 +374,6 @@ function onUserLeft(id) {
     console.log(map1.get(id) + "hey3");
     var s= map1.get(id) ;
     $('#' + s).remove();
-
     const tracks = remoteTracks[id];
     var i = getNumberOfParticipants();
     // if (i < 2) {
