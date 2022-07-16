@@ -17,10 +17,12 @@ function initate() {
     var style1 = document.getElementById("stylesheet1");
     var style2 = document.getElementById("stylesheet2");
     var style3 = document.getElementById("stylesheet3");
+    var style4 = document.getElementById("stylesheet4");
 
     style1.onclick = function () {swapStyleSheet("style1.css") ;};
     style2.onclick = function () {swapStyleSheet("style2.css") ;};
     style3.onclick = function () {swapStyleSheet("style3.css") ;};
+    style4.onclick = function () {swapStyleSheet("style4.css") ;};
 }
 
 window.onload = initate;
