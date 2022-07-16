@@ -17,7 +17,6 @@
     top: 54%;
     left: 70%;
     transform: translate(-50%, -50%);
-    border-radius: 100%;
   }
   
   .video2 {
@@ -27,7 +26,6 @@
     top: 25%;
     left: 13%;
     transform: translate(-50%, -50%);
-    border-radius: 100%;
   }
   
   .video3 {
@@ -37,7 +35,6 @@
     top: 25%;
     left: 87%;
     transform: translate(-50%, -50%);
-    border-radius: 100%;
   }
   
   .video4 {
@@ -47,7 +44,6 @@
     top: 85%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 100%;
   }
   
   .local {
@@ -57,5 +53,4 @@
     top: 54%;
     left: 33%;
     transform: translate(-50%, -50%);
-    border-radius: 100%;
   }
